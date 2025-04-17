@@ -13,7 +13,6 @@ public class PlayerAirChargeAttack_1EndState : PlayerAirComboState
     {
         base.Enter();
 
-        CameraManager.Instance.playerCameraManager.playerNormalCamera.StartCameraShake(0.5f, 1f);
     }
 
     public override void Exit()

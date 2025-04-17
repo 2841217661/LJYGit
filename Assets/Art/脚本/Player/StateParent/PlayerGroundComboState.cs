@@ -31,8 +31,8 @@ public class PlayerGroundComboState : PlayerComboState
             ChangeState(playerManager.dodgeState);
 
             // 计算目标旋转方向
-            Vector3 targetRotationDirection = CameraManager.Instance.playerCameraManager.playerNormalCamera.transform.forward * playerManager.playerInputManager.movementInput.y
-                                            + CameraManager.Instance.playerCameraManager.playerNormalCamera.transform.right * playerManager.playerInputManager.movementInput.x;
+            Vector3 targetRotationDirection = playerManager.playerCamera.transform.forward * playerManager.playerInputManager.movementInput.y
+                                            + playerManager.playerCamera.transform.right * playerManager.playerInputManager.movementInput.x;
 
             targetRotationDirection.Normalize();
             targetRotationDirection.y = 0f;

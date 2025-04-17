@@ -89,8 +89,8 @@ public class PlayerAirIdleState : PlayerAirState
     private void HandleMove()
     {
         Vector3 moveDirection;
-        moveDirection = CameraManager.Instance.playerCameraManager.playerNormalCamera.transform.forward * playerManager.playerInputManager.movementInput.y
-                + CameraManager.Instance.playerCameraManager.playerNormalCamera.transform.right * playerManager.playerInputManager.movementInput.x;
+        moveDirection = playerManager.playerCamera.transform.forward * playerManager.playerInputManager.movementInput.y
+                + playerManager.playerCamera.transform.right * playerManager.playerInputManager.movementInput.x;
         moveDirection.Normalize(); //归一化，得到方向向量
         moveDirection.y = 0; //忽略在y轴的移动，及只能在平面（地面）移动
 
@@ -100,8 +100,8 @@ public class PlayerAirIdleState : PlayerAirState
     private void HandleRotate()
     {
         // 计算目标旋转方向
-        Vector3 targetRotationDirection = CameraManager.Instance.playerCameraManager.playerNormalCamera.transform.forward * playerManager.playerInputManager.movementInput.y
-                                        + CameraManager.Instance.playerCameraManager.playerNormalCamera.transform.right * playerManager.playerInputManager.movementInput.x;
+        Vector3 targetRotationDirection = playerManager.playerCamera.transform.forward * playerManager.playerInputManager.movementInput.y
+                                        + playerManager.playerCamera.transform.right * playerManager.playerInputManager.movementInput.x;
 
         targetRotationDirection.Normalize();
         targetRotationDirection.y = 0f;

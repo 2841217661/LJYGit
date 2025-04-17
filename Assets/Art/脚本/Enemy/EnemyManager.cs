@@ -9,6 +9,17 @@ public class EnemyManager : MonoBehaviour
     [HideInInspector] public Rigidbody rg;
     [HideInInspector] public CapsuleCollider capsuleCollider;
 
+    public GameObject weapon;
+
+    [Header("警戒Player")]
+    public float guardRadius;
+    public Vector3 guardCentPointOffset; //警戒范围中心为自身位置+offset
+    public LayerMask guardLayer;
+    public Transform guardPointParent;
+    public float guardWalkSpeed;
+    public float guardRotateSpeed;
+    public PlayerManager guardTargetManager;
+
     [Header("受击")]
     public float knockbackSpeedMul; //扩大动画曲线参数倍率
     public float maxKnockbackThreshold; //最大击退阈值
@@ -32,24 +43,31 @@ public class EnemyManager : MonoBehaviour
     }
 
     public EnemyState currentState;
-    public EnemyIdleState idleState { get; private set; }
-    public EnemyHitState hitState { get; private set; }
-    public EnemyGetUpState getUpState { get; private set; }
-
+    public Enemy_G_IdleState G_idleState { get; private set; }
+    public Enemy_G_HitState G_hitState { get; private set; }
+    public Enemy_G_GetUpState G_getUpState { get; private set; }
+    public Enemy_G_WalkState G_walkState{ get; private set; }
+    public Enemy_G_CancleState G_cancleState { get; private set; }
+    public Enemy_C_PrepareState C_prepareState { get; private set; }
+    public Enemy_C_IdleState C_idleState { get; private set; }
     private void Awake()
     {
         animator = GetComponent<Animator>();
         rg = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
 
-        idleState = new EnemyIdleState(this, "Idle", false);
-        hitState = new EnemyHitState(this, "Hit", false);
-        getUpState = new EnemyGetUpState(this, "GetUp", false);
+        G_idleState = new Enemy_G_IdleState(this, "G_Idle", false);
+        G_hitState = new Enemy_G_HitState(this, "Hit", false);
+        G_getUpState = new Enemy_G_GetUpState(this, "Get_Up", false);
+        G_walkState = new Enemy_G_WalkState(this, "Walk", false);
+        C_prepareState = new Enemy_C_PrepareState(this, "Prepare", false);
+        C_idleState = new Enemy_C_IdleState(this, "C_Idle", false);
+        G_cancleState = new Enemy_G_CancleState(this, "Cancle", false);
     }
 
     private void Start()
     {
-        currentState = idleState;
+        currentState = G_idleState;
 
         currentKnockbackThreshold = maxKnockbackThreshold;
     }
@@ -61,6 +79,35 @@ public class EnemyManager : MonoBehaviour
 
         RecoveKnockbackThreshold();
     }
+
+    private void OnAnimatorMove()
+    {
+        if (!currentState.useRootMotion)
+            return;
+
+        HandleRootMotion();
+    }
+
+    private void HandleRootMotion()
+    {
+        Vector3 rootMotionDelta = animator.deltaPosition;
+        Quaternion rootRotationDelta = animator.deltaRotation;
+
+        // 应用位移
+        if (rg != null && !rg.isKinematic)
+        {
+            // 使用Rigidbody移动和旋转（必须在FixedUpdate中才生效）
+            rg.MovePosition(rg.position + rootMotionDelta);
+            rg.MoveRotation(rg.rotation * rootRotationDelta);
+        }
+        else
+        {
+            // 如果是Kinematic Rigidbody 或者没加刚体，就直接修改Transform
+            transform.position += rootMotionDelta;
+            transform.rotation *= rootRotationDelta;
+        }
+    }
+
 
     /// <summary>
     /// 敌人受击逻辑
@@ -127,12 +174,12 @@ public class EnemyManager : MonoBehaviour
         }
 
         // 切换为受击姿态
-        currentState.ChangeState(hitState);
+        currentState.ChangeState(G_hitState);
         //进行动画过渡
         animator.CrossFadeInFixedTime(animationName, 0.1f);
 
-        (currentState as EnemyHitState).damageType = _damageType;
-        (currentState as EnemyHitState).hitDir = _hitDirection;
+        (currentState as Enemy_G_HitState).damageType = _damageType;
+        (currentState as Enemy_G_HitState).hitDir = _hitDirection;
     }
 
     //持续恢复击退阈值
@@ -159,4 +206,51 @@ public class EnemyManager : MonoBehaviour
 
         return false;
     }
+
+    private void OnDrawGizmos()
+    {
+        //绘制警戒范围
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position + guardCentPointOffset, guardRadius);
+    }
+
+    //警戒Player
+    public PlayerManager GuardDetectePlayer()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position + guardCentPointOffset, guardRadius, guardLayer); 
+
+        if(colliders.Length > 0)
+        {
+            return colliders[0].GetComponent<PlayerManager>();
+        }
+
+        return null;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    #region 动画事件
+
+    //拔刀
+    public void Prepare()
+    {
+        weapon.SetActive(true);
+    }
+
+    //收刀
+    public void Cancle()
+    {
+        weapon.SetActive(false);
+    }
+
+    #endregion
 }

@@ -9,6 +9,8 @@ public class PlayerManager : MonoBehaviour
     [HideInInspector] public CharacterController characterController;
 
     [SerializeField] private string 当前姿态;
+
+    public Camera playerCamera;
     public float a;
     public float b;
     [Header("Walk")]
@@ -173,13 +175,6 @@ public class PlayerManager : MonoBehaviour
         currentState.Update();
 
         当前姿态 = currentState.ToString();
-
-
-        //测试
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            CameraManager.Instance.playerCameraManager.playerNormalCamera.StartCameraShake(1f, 3f);
-        }
     }
 
     private void OnDrawGizmos()
@@ -379,13 +374,6 @@ public class PlayerManager : MonoBehaviour
         if (enemys.Length == 0)
         {
             return;
-        }
-
-        //攻击到敌人概率抖动相机
-        float chance = Random.Range(0, 1f);
-        if (chance > 0.5f)
-        {
-            CameraManager.Instance.playerCameraManager.playerNormalCamera.StartCameraShake(0.5f, 0.3f);
         }
 
         foreach (Collider enemy in enemys)

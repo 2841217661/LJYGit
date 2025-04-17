@@ -12,16 +12,12 @@ public class PlayerAirChargeAttack_1LoopState : PlayerAirComboState
     {
         base.Enter();
 
-        targetDir = CameraManager.Instance.playerCameraManager.playerNormalCamera.transform.GetChild(0).transform.forward;
-
-        CameraManager.Instance.playerCameraManager.ChangePlayerCamera(CameraManager.Instance.playerCameraManager.playerAirDashCamera);
+        targetDir = playerManager.playerCamera.transform.forward;
     }
 
     public override void Exit()
     {
         base.Exit();
-
-        CameraManager.Instance.playerCameraManager.ChangePlayerCamera(CameraManager.Instance.playerCameraManager.playerNormalCamera);
 
     }
 

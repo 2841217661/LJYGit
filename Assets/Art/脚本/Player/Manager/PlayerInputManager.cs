@@ -25,7 +25,6 @@ public class PlayerInputManager : MonoBehaviour
     public void GetAllInput()
     {
         GetMoveInput();
-        GetCameraInput();
         ChangeRunInput();
     }
 
@@ -43,13 +42,6 @@ public class PlayerInputManager : MonoBehaviour
         movementInput = new Vector2(horizontalInput, verticalInput);
         moveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
         moveRawAmount = Mathf.Clamp01(Mathf.Abs(horizontalRawInput) + Mathf.Abs(verticalRawInput));
-    }
-
-    //相机输入
-    private void GetCameraInput()
-    {
-        cameraHorizontalInput = Input.GetAxis("Mouse X");
-        cameraVerticalInput = Input.GetAxis("Mouse Y");
     }
 
     //奔跑输入切换

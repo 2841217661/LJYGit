@@ -19,7 +19,6 @@ public class PlayerPowerAttackLoopState : PlayerState
     {
         base.Exit();
 
-        CameraManager.Instance.playerCameraManager.ChangePlayerCamera(CameraManager.Instance.playerCameraManager.playerNormalCamera);
     }
 
     public override void Update()

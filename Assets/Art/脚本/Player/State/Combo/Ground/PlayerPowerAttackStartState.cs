@@ -10,8 +10,6 @@ public class PlayerPowerAttackStartState : PlayerState
     {
         base.Enter();
 
-        CameraManager.Instance.playerCameraManager.ChangePlayerCamera(CameraManager.Instance.playerCameraManager.playerPowerAttackCamera);
-
     }
 
     public override void Exit()

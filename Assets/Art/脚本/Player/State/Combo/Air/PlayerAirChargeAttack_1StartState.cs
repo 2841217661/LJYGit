@@ -16,16 +16,11 @@ public class PlayerAirChargeAttack_1StartState : PlayerAirComboState
 
         dashTimer = 0f;
         canDash = false;
-
-        //改变相机对象
-        CameraManager.Instance.playerCameraManager.ChangePlayerCamera(CameraManager.Instance.playerCameraManager.playerAirChargeCamera);
     }
 
     public override void Exit()
     {
         base.Exit();
-
-        CameraManager.Instance.playerCameraManager.ChangePlayerCamera(CameraManager.Instance.playerCameraManager.playerNormalCamera);
 
     }
 
@@ -96,7 +91,7 @@ public class PlayerAirChargeAttack_1StartState : PlayerAirComboState
     private void HandleTheRotate()
     {
         //目标方向
-        Vector3 targetRotationDirection = CameraManager.Instance.playerCameraManager.playerAirChargeCamera.transform.forward;
+        Vector3 targetRotationDirection = playerManager.playerCamera.transform.forward;
 
         targetRotationDirection.Normalize();
         targetRotationDirection.y = 0; //只在水平面进行旋转
