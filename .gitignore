@@ -1,0 +1,23 @@
+# 忽略 Visual Studio 文件
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# 忽略 Unity 文件夹
+Library/
+Temp/
+Obj/
+Build/
+Builds/
+Logs/
+MemoryCaptures/
+sysinfo.txt
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.userprefs
+UserSettings/
