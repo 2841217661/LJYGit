@@ -6,6 +6,8 @@ public class EnemyHitState : EnemyGroundState
     public EnumManager.EnemyDamageType damageType;
     public Vector3 hitDir;
 
+    public Action action_generateDamageEffect; //受击特效实例委托
+
     public EnemyHitState(EnemyManager _enemyManager, string _animationName, bool _useRootMotionPart) : base(_enemyManager, _animationName, _useRootMotionPart)
     {
     }
@@ -15,6 +17,7 @@ public class EnemyHitState : EnemyGroundState
         base.Enter();
 
         enemyManager.rb.linearVelocity = Vector3.zero; //防止出现bug
+
     }
 
     public override void Exit()
@@ -32,6 +35,8 @@ public class EnemyHitState : EnemyGroundState
     public override void Update()
     {
         base.Update();
+
+        action_generateDamageEffect?.Invoke();
 
         AnimatorStateInfo stateInfo = enemyManager.animator.GetCurrentAnimatorStateInfo(0);
         AnimatorStateInfo nextStateInfo = enemyManager.animator.GetNextAnimatorStateInfo(0);
@@ -83,8 +88,16 @@ public class EnemyHitState : EnemyGroundState
 
         Vector3 moveVector = hitDir * moveAmount * enemyManager.knockbackSpeedMul * Time.deltaTime;
 
-        // 直接修改 transform
-        enemyManager.transform.position += moveVector;
+        // 平滑移动：如果使用 Rigidbody，则推荐用 MovePosition
+        enemyManager.rb.MovePosition(enemyManager.rb.position + moveVector);
     }
 
+    public void GenerateDamageEffect()
+    {
+
+        enemyManager.GenerateDamageEffect();
+
+        //注销委托
+        action_generateDamageEffect -= GenerateDamageEffect;
+    }
 }

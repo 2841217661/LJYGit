@@ -60,15 +60,29 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.10434373
+      - time: 0.08132079
         functionName: PlayCombo_1_3_1SFX
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 1
         messageOptions: 0
+      - time: 0.098922215
+        functionName: GenerateCombo_1_3_1Effset
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.34059373
         functionName: AttackDetecte
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 1
+        messageOptions: 0
+      - time: 0.42925423
+        functionName: PlayCombo_1_3Sound
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -82,7 +96,14 @@ ModelImporter:
         intParameter: 1
         messageOptions: 0
       - time: 0.42925423
-        functionName: PlayCombo_1_3Sound
+        functionName: GenerateCombo_1_3_2Effset
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 1
+        messageOptions: 0
+      - time: 0.06980162
+        functionName: AttackDetecte
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

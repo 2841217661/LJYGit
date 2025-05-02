@@ -2,7 +2,7 @@ using UnityEngine;
 using static EnemyAnimationName;
 public class EnemyIdleState : EnemyGroundState
 {
-    private float maxIdleTime = 0f; //每次行为结束时需要待机的最大时间
+    private float maxIdleTime = 0.2f; //每次行为结束时需要待机的最大时间
     private float exitIdleTimer; //待机计时器
     public EnemyIdleState(EnemyManager _enemyManager, string _animationName, bool _useRootMotionPart) : base(_enemyManager, _animationName, _useRootMotionPart)
     {
@@ -30,7 +30,7 @@ public class EnemyIdleState : EnemyGroundState
 
         exitIdleTimer += Time.deltaTime;
 
-        //if (exitIdleTimer < maxIdleTime) return; //未到达退出待机时间，等待下一帧
+        if (exitIdleTimer < maxIdleTime) return; //未到达退出待机时间，等待下一帧
 
         AnimatorStateInfo stateInfo = enemyManager.animator.GetCurrentAnimatorStateInfo(0);
         if(stateInfo.IsName(animationName) && !enemyManager.animator.IsInTransition(0))

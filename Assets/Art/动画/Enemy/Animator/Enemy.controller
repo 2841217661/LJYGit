@@ -1452,23 +1452,20 @@ AnimatorStateMachine:
   m_Name: Explore
   m_ChildStates:
   - serializedVersion: 1
-    m_State: {fileID: 9151689205282303422}
-    m_Position: {x: 30, y: 190, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: -6250079372733813703}
-    m_Position: {x: 90, y: 550, z: 0}
+    m_Position: {x: 30, y: 540, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6800871379586123234}
-    m_Position: {x: 90, y: 610, z: 0}
+    m_Position: {x: 30, y: 600, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5565180308244568300}
-    m_Position: {x: 90, y: 430, z: 0}
+    m_Position: {x: 30, y: 420, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3385913432144985354}
-    m_Position: {x: 90, y: 490, z: 0}
+    m_Position: {x: 30, y: 480, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3246190969689432957}
-    m_Position: {x: 90, y: 670, z: 0}
+    m_Position: {x: 30, y: 660, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -1478,7 +1475,7 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 320, y: 20, z: 0}
   m_ParentStateMachinePosition: {x: 330, y: 520, z: 0}
-  m_DefaultState: {fileID: 9151689205282303422}
+  m_DefaultState: {fileID: -5565180308244568300}
 --- !u!206 &1814100095427785866
 BlendTree:
   m_ObjectHideFlags: 1
@@ -1523,7 +1520,7 @@ AnimatorState:
   m_Transitions: []
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
+  m_IKOnFeet: 1
   m_WriteDefaultValues: 1
   m_Mirror: 0
   m_SpeedParameterActive: 0
@@ -2567,29 +2564,3 @@ BlendTree:
   m_UseAutomaticThresholds: 1
   m_NormalizedBlendValues: 0
   m_BlendType: 0
---- !u!1102 &9151689205282303422
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Null
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 

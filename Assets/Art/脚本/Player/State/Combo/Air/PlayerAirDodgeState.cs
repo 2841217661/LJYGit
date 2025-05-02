@@ -10,6 +10,11 @@ public class PlayerAirDodgeState : PlayerAirState
     {
         base.Enter();
 
+        //播放一次闪避音效
+        AudioManager.Instance.PlaySound(AudioPathConfi.SFX_Dodge, AudioType.SFX, playerManager.transform.position);
+        //概率播放一次语音
+        playerManager.PlayPlayerDodgeSound();
+
         //根据当前是否有移动输入进行不同动画
         if (playerManager.playerInputManager.moveRawAmount == 0)
         {

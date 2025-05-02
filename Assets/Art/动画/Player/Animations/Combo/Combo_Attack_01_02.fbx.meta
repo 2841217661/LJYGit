@@ -74,6 +74,13 @@ ModelImporter:
         floatParameter: 0
         intParameter: 3
         messageOptions: 0
+      - time: 0.12487708
+        functionName: GenerateCombo_1_5_1Effset
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 3
+        messageOptions: 0
       - time: 0.17406508
         functionName: PlayCombo_1_5Sound
         data: 
@@ -87,6 +94,13 @@ ModelImporter:
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 3
+        messageOptions: 0
+      - time: 0.31700754
+        functionName: GenerateCombo_1_5_2Effset
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
         messageOptions: 0
       - time: 0.31760073
         functionName: PlayCombo_1_5_2SFX

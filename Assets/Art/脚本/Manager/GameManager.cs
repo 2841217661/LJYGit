@@ -1,8 +1,11 @@
+using Cinemachine;
 using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
     private bool isCursorLocked = false;
+
+    public bool useBigEffect;
 
     protected override void Init()
     {

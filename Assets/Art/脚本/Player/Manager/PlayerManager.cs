@@ -1,29 +1,30 @@
-﻿                                                                                                                                                                                      /* 
-                                            ╱|、喵喵神保佑
-                                            (°､ 。 7  永无BUG
-                                            |、ヽ  〳      
-                                            ＿／  ／  ノ  ヽ
-                                            ／　 ／＞⁰－。─ ミ＿xノ 
-                                            /　/ ／　  ／ ／ ／  |
-                                            /　/ /    ／ ／ ／   ヽ
-                                            ﾉ　 │     /  / ／     | |
-                                            ∠二二二二二二二二二二二二二ヽ
-                                            |　　　　　  Code by 猫猫教信徒　　　　　　|
-                                            |　　　　　  2025 喵历·吉祥之年　　　　　|
-                                            ＼　                                  ／
-                                            ──══━ ฅ•ω•ฅ 🐾 猫力护体 🐾ฅ•ω•ฅ ━══──
-                                            ✧･ﾟ: *✧･ﾟ:* 魔法结界 *:･ﾟ✧*:･ﾟ✧
+﻿/* 
+╱|、喵喵神保佑
+(°､ 。 7  永无BUG
+|、ヽ  〳      
+＿／  ／  ノ  ヽ
+／　 ／＞⁰－。─ ミ＿xノ 
+/　/ ／　  ／ ／ ／  |
+/　/ /    ／ ／ ／   ヽ
+ﾉ　 │     /  / ／     | |
+∠二二二二二二二二二二二二二ヽ
+|　　　　　  Code by 猫猫教信徒　　　　　　|
+|　　　　　  2025 喵历·吉祥之年　　　　　|
+＼　                                  ／
+──══━ ฅ•ω•ฅ 🐾 猫力护体 🐾ฅ•ω•ฅ ━══──
+✧･ﾟ: *✧･ﾟ:* 魔法结界 *:･ﾟ✧*:･ﾟ✧
 
-                                            ✦ 编译必过 ✦  
-                                            ✦ 运行如风 ✦  
-                                            ✦ 零 warning ✦  
-                                            ✦ 内存安全 ✦  
+✦ 编译必过 ✦  
+✦ 运行如风 ✦  
+✦ 零 warning ✦  
+✦ 内存安全 ✦  
 
-                                            ♡〜٩(⸝⸝⸝◕ั ॣ ◕ั⸝⸝⸝)۶〜♡ 猫爪赐福 ♡〜٩(ˊ◡ˋ )۶〜♡
-                                                                                                                                                                                      */
+♡〜٩(⸝⸝⸝◕ั ॣ ◕ั⸝⸝⸝)۶〜♡ 猫爪赐福 ♡〜٩(ˊ◡ˋ )۶〜♡
+*/
 
 
 
+using Cinemachine;
 using System.Collections.Generic;
 using UnityEngine;
 using static EnumManager;
@@ -37,6 +38,7 @@ public class PlayerManager : MonoBehaviour
     [HideInInspector] public CharacterController characterController;
 
     [SerializeField] private string 当前姿态;
+
 
     public Camera playerCamera;
     public float a;
@@ -181,11 +183,6 @@ public class PlayerManager : MonoBehaviour
         currentState.Update();
 
         当前姿态 = currentState.ToString();
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            TakeDamage(transform.forward,PlayerDamageType.Heavy);
-        }
     }
 
     #region 可视化绘制
@@ -798,6 +795,155 @@ public class PlayerManager : MonoBehaviour
     {
         string[] names = new string[] { AudioPathConfi.Sound_HeavyHit_1,AudioPathConfi.Sound_HeavyHit_2 };
         PlayPlayerSound(names, 0.8f);
+    }
+    #endregion
+
+    #region 播放特效
+    [Header("特效设置")]
+    public Vector3 positionOffset;
+    public Quaternion rotationOffset;
+    //combo_1_1
+    public void GenerateCombo_1_1Effset()
+    {
+        if (GameManager.Instance.useBigEffect)
+        {
+            Vector3 spawnPos = transform.position + new Vector3(0, 0.9f, 0);
+            Quaternion spawnRot = transform.rotation * Quaternion.Euler(0f, 0f, 45f);
+
+            EffectManager.Instance.InitEffectGameObject(EffectPathConfi.Effect_Combo_1_1, spawnPos, spawnRot);
+        }
+        else
+        {
+            Vector3 spawnPos = transform.position + new Vector3(0, 0.9f, 0);
+            Quaternion spawnRot = transform.rotation * Quaternion.Euler(0f, 0f, 225f);
+
+            EffectManager.Instance.InitEffectGameObject(EffectPathConfi.Effect_Combo_1_1_Clone, spawnPos, spawnRot);
+        }
+    }
+    //combo_1_2
+    public void GenerateCombo_1_2Effset()
+    {
+        if(GameManager.Instance.useBigEffect)
+        {
+            Vector3 spawnPos = transform.position + new Vector3(0, 0.9f, 0);
+            Quaternion spawnRot = transform.rotation;
+
+            EffectManager.Instance.InitEffectGameObject(EffectPathConfi.Effect_Combo_1_2, spawnPos, spawnRot);
+        }
+        else
+        {
+            Vector3 spawnPos = transform.position + new Vector3(0, 0.9f, 0);
+            Quaternion spawnRot = transform.rotation;
+
+            EffectManager.Instance.InitEffectGameObject(EffectPathConfi.Effect_Combo_1_2_Clone, spawnPos, spawnRot);
+        }
+    }
+
+    //combo_1_3_1
+    public void GenerateCombo_1_3_1Effset()
+    {
+        if (GameManager.Instance.useBigEffect)
+        {
+            Vector3 spawnPos = transform.position + new Vector3(0, 0.9f, 0);
+            Quaternion spawnRot = transform.rotation * Quaternion.Euler(45, -90, 0f);
+
+
+            EffectManager.Instance.InitEffectGameObject(EffectPathConfi.Effect_Combo_1_3_1, spawnPos, spawnRot);
+        }
+        else
+        {
+            Vector3 spawnPos = transform.position + new Vector3(0, 0.9f, 0);
+            Quaternion spawnRot = transform.rotation * Quaternion.Euler(0, 0, 135f);
+
+
+            EffectManager.Instance.InitEffectGameObject(EffectPathConfi.Effect_Combo_1_3_1_Clone, spawnPos, spawnRot);
+        }
+    }
+    //combo_1_3_2
+    public void GenerateCombo_1_3_2Effset()
+    {
+        if (GameManager.Instance.useBigEffect)
+        {
+            Vector3 spawnPos = transform.position + new Vector3(0, 0.9f, 0);
+            Quaternion spawnRot = transform.rotation * Quaternion.Euler(0, 0, 45f);
+            EffectManager.Instance.InitEffectGameObject(EffectPathConfi.Effect_Combo_1_3_2, spawnPos, spawnRot);
+        }
+        else
+        {
+            Vector3 spawnPos = transform.position + new Vector3(0, 0.9f, 0);
+            Quaternion spawnRot = transform.rotation * Quaternion.Euler(0, 0, 45f);
+
+            EffectManager.Instance.InitEffectGameObject(EffectPathConfi.Effect_Combo_1_3_2_Clone, spawnPos, spawnRot);
+        }
+    }
+
+    //combo_1_4
+    public void GenerateCombo_1_4Effset()
+    {
+        if(GameManager.Instance.useBigEffect)
+        {
+            Vector3 spawnPos = transform.position + new Vector3(0, 0f, 0);
+            Quaternion spawnRot = transform.rotation * Quaternion.Euler(0, 0f, 0);
+
+            EffectManager.Instance.InitEffectGameObject(EffectPathConfi.Effect_Combo_1_4, spawnPos, spawnRot);
+        }
+        else
+        {
+            Vector3 spawnPos = transform.position + new Vector3(0, 0.5f, 0);
+            Quaternion spawnRot = transform.rotation * Quaternion.Euler(0, -90f, 0);
+
+            EffectManager.Instance.InitEffectGameObject(EffectPathConfi.Effect_Combo_1_4_Clone, spawnPos, spawnRot);
+        }
+    }
+
+    //combo_1_5_1
+    public void GenerateCombo_1_5_1Effset()
+    {
+        if (GameManager.Instance.useBigEffect)
+        {
+            Vector3 spawnPos = transform.position + new Vector3(0, 0.9f, 0);
+            Quaternion spawnRot = transform.rotation * Quaternion.Euler(0, 0, -45f);
+
+            EffectManager.Instance.InitEffectGameObject(EffectPathConfi.Effect_Combo_1_5_1, spawnPos, spawnRot);
+        }
+        else
+        {
+            Vector3 spawnPos = transform.position + new Vector3(0, 0.9f, 0);
+            Quaternion spawnRot = transform.rotation * Quaternion.Euler(0, 0, 135f);
+
+            EffectManager.Instance.InitEffectGameObject(EffectPathConfi.Effect_Combo_1_5_1_Clone, spawnPos, spawnRot);
+        }
+    }
+
+    //combo_1_5_2
+    public void GenerateCombo_1_5_2Effset()
+    {
+        if (GameManager.Instance.useBigEffect)
+        {
+            Vector3 spawnPos = transform.position + new Vector3(0, 0.9f, 0);
+            Quaternion spawnRot = transform.rotation * Quaternion.Euler(0, 0, 0);
+
+
+            EffectManager.Instance.InitEffectGameObject(EffectPathConfi.Effect_Combo_1_5_2, spawnPos, spawnRot);
+        }
+        else
+        {
+            Vector3 spawnPos = transform.position + new Vector3(0, 0.9f, 0);
+            Quaternion spawnRot = transform.rotation * Quaternion.Euler(0, 0, 0);
+
+
+            EffectManager.Instance.InitEffectGameObject(EffectPathConfi.Effect_Combo_1_5_2_Clone, spawnPos, spawnRot);
+        }
+    }
+    #endregion
+
+    #region 相机抖动
+    [Header("抖动源")]
+    public CinemachineImpulseSource attackShockImpulse;
+
+    public void CameraAttackShock()
+    {
+        attackShockImpulse.GenerateImpulse();
     }
     #endregion
 }

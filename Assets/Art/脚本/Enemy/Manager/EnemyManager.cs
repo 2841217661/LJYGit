@@ -152,6 +152,8 @@ public class EnemyManager : MonoBehaviour
                 hitState.damageType = _damageType;
                 hitState.hitDir = _hitDirection;
 
+                //注册受击委托
+                (currentState as EnemyHitState).action_generateDamageEffect += (currentState as EnemyHitState).GenerateDamageEffect;
                 //进行动画过渡
                 animator.CrossFadeInFixedTime(animationName, 0.1f);
                 break;
@@ -171,6 +173,8 @@ public class EnemyManager : MonoBehaviour
                 hitState.hitDir = _hitDirection;
                 //进行动画过渡
                 animator.CrossFadeInFixedTime(animationName, 0.1f);
+                //注册受击委托
+                (currentState as EnemyHitState).action_generateDamageEffect += (currentState as EnemyHitState).GenerateDamageEffect;
                 break;
             case EnemyDamageType.Heavy:
                 animationName = Hit_Down;
@@ -180,6 +184,8 @@ public class EnemyManager : MonoBehaviour
                 hitState.hitDir = _hitDirection;
                 //进行动画过渡
                 animator.CrossFadeInFixedTime(animationName, 0.1f);
+                //注册受击委托
+                (currentState as EnemyHitState).action_generateDamageEffect += (currentState as EnemyHitState).GenerateDamageEffect;
                 break;
             case EnemyDamageType.FlyAway:
                 animationName = Hit_Air_Start;
@@ -188,6 +194,8 @@ public class EnemyManager : MonoBehaviour
                 currentState.ChangeState(airHitState);
                 airHitState.damageType = EnemyDamageType.FlyAway;
                 animator.CrossFadeInFixedTime(animationName, 0.1f);
+                //注册受击委托
+                (currentState as EnemyHitState).action_generateDamageEffect += (currentState as EnemyHitState).GenerateDamageEffect;
                 break;
             case EnemyDamageType.AirLight:
                 animationName = Hit_Air_Start;
@@ -196,6 +204,8 @@ public class EnemyManager : MonoBehaviour
                 currentState.ChangeState(airHitState);
                 airHitState.damageType = EnemyDamageType.AirLight;
                 animator.CrossFadeInFixedTime(animationName, 0.1f);
+                //注册受击委托
+                (currentState as EnemyHitState).action_generateDamageEffect += (currentState as EnemyHitState).GenerateDamageEffect;
                 break;
             default:
                 Debug.LogError("出错了...");
@@ -468,5 +478,26 @@ public class EnemyManager : MonoBehaviour
 
     #region 播放音效
     //随机播放音效
+    #endregion
+
+    #region 特效
+    //受伤特效
+    public void GenerateDamageEffect()
+    {
+        if (GameManager.Instance.useBigEffect)
+        {
+            Vector3 spawnPos = transform.position + new Vector3(0, 0.75f, 0);
+            Quaternion spawnRot = transform.rotation * Quaternion.Euler(0, 0, 0);
+
+            EffectManager.Instance.InitEffectGameObject(EffectPathConfi.Effect_Damage, spawnPos, spawnRot);
+        }
+        else
+        {
+            Vector3 spawnPos = transform.position + new Vector3(0, 0.75f, 0);
+            Quaternion spawnRot = transform.rotation * Quaternion.Euler(0, 0, 0);
+
+            EffectManager.Instance.InitEffectGameObject(EffectPathConfi.Effect_Damage_Clone, spawnPos, spawnRot);
+        }
+    }
     #endregion
 }

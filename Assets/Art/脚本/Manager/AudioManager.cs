@@ -22,7 +22,7 @@ public class AudioManager : MonoSingleton<AudioManager>
     [SerializeField] private AudioSource soundSource; //语言播放器
     [SerializeField] private AudioSource uiSource; //ui音效播放器
 
-    private List<GameObject> sfxAudioObject; //缓存正在播放的音效(当音效的音量被改变时，当前正在播放的音效也应该改变音量)
+    private List<GameObject> sfxAudioObject; //TODO:缓存正在播放的音效(当音效的音量被改变时，当前正在播放的音效也应该改变音量)
     private Dictionary<string, AudioClip> sfxCacheAudio; //缓存已打开的音效 
     private Dictionary<string, AudioClip> bgmCacheAudio; //缓存已打开的音乐 
     private Dictionary<string, AudioClip> soundCacheAudio; //缓存已打开的声音 
@@ -117,6 +117,7 @@ public class AudioManager : MonoSingleton<AudioManager>
         {
             case AudioType.SFX:
                 PlaySFX(GetAudio(_path, _audioType), _playPoint,_minTone, _maxTone,_minDis,_maxDis);
+
                 break;
             case AudioType.BGM:
                 bgmSource.PlayOneShot(GetAudio(_path, _audioType));
